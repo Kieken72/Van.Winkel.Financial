@@ -1,0 +1,1 @@
+sqlcmd -S $HOSTNAME -i ./sql-scripts/create-user.sql
