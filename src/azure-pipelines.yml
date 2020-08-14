@@ -1,0 +1,10 @@
+name: 1.0.$(date:yyyyMMdd)$(rev:.r)
+trigger:
+  branches:
+    include:
+    - master
+    - feature/*
+    - bugfix/*
+jobs:
+- template: ./Van.Winkel.Financial.Host/azure-pipelines.yml
+- template: ./Van.Winkel.Financial.Database/azure-pipelines.yml

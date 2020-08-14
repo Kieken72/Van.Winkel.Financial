@@ -1,0 +1,21 @@
+jobs:
+- job: van_winkel_financial_host
+  pool: 'default'
+  variables:
+    buildConfiguration: 'Release'
+  steps:
+  - script: |
+      cd $(Build.SourcesDirectory)/src/Van.Winkel.Financial.Host
+      dotnet build --configuration $(buildConfiguration)
+      dotnet publish --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)/van-winkel-financial-host
+
+  - task: PublishTestResults@2
+    inputs:
+      testRunner: VSTest
+      testResultsFiles: '**/*.trx'
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Artifact
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+    condition: succeededOrFailed()
