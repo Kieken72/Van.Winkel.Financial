@@ -1,4 +1,5 @@
 ﻿using FluentMigrator;
+using Van.Winkel.Financial.Database.Seed;
 
 namespace Van.Winkel.Financial.Database.Migrations
 {
