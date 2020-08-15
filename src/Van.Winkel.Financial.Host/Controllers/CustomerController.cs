@@ -10,7 +10,7 @@ using Van.Winkel.Financial.Service.Customer;
 namespace Van.Winkel.Financial.Host.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
 

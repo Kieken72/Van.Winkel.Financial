@@ -11,7 +11,8 @@ namespace Van.Winkel.Financial.Domain
         public virtual Customer Customer { get; private set; }
         public decimal Balance { get; private set; }
         public DateTime OpenedOn { get; private set; }
-        public virtual ICollection<Transaction> Transactions { get; private set; }
+        public virtual ICollection<Transaction> IncomingTransactions { get; private set; }
+        public virtual ICollection<Transaction> OutgoingTransactions { get; private set; }
 
         public Account(Guid customerId)
         {
