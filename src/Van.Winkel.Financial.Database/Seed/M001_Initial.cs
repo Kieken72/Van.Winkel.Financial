@@ -7,6 +7,7 @@ namespace Van.Winkel.Financial.Database.Seed
         {
             var insert = migration.Insert;
 
+
         }
     }
 }
