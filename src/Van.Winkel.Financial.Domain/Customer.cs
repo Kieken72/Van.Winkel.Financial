@@ -14,7 +14,11 @@ namespace Van.Winkel.Financial.Domain
         public Customer(string name, string surname)
         {
             Id = Guid.NewGuid();
+            if(string.IsNullOrWhiteSpace(name) || name.Length > 250)
+                throw new InvalidOperationException("Name has incorrect length");
             Name = name;
+            if (string.IsNullOrWhiteSpace(surname) || surname.Length > 250)
+                throw new InvalidOperationException("Surname has incorrect length");
             Surname = surname;
             CreatedOn = DateTime.UtcNow;
         }
