@@ -2,7 +2,8 @@
 
 namespace Van.Winkel.Financial.Enums
 {
-    public class Class1
+    public enum ValidationErrorCode
     {
+
     }
 }
