@@ -26,6 +26,13 @@ namespace Van.Winkel.Financial.Host.Dto
                 return new OkObjectResult(_data);
             }
 
+            if (_response.HasNotFoundError)
+            {
+                return new NotFoundObjectResult(
+                    new ValidationBag(_response.Bag.Errors.Select(e =>
+                        new Error(e.ValidationErrorCode, e.NamedParameters))));
+            }
+
             return new BadRequestObjectResult(
                 new ValidationBag(_response.Bag.Errors.Select(e =>
                     new Error(e.ValidationErrorCode, e.NamedParameters))));
