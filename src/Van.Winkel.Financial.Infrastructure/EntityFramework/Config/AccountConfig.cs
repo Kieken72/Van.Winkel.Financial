@@ -10,8 +10,8 @@ namespace Van.Winkel.Financial.Infrastructure.EntityFramework.Config
         {
             var table = builder.ToTable("Account");
             table.HasKey("Id");
-            table.HasMany(_ => _.Transactions).WithOne(_ => _.RecipientAccount).HasForeignKey(_ => _.RecipientAccountId);
-            table.HasMany(_ => _.Transactions).WithOne(_ => _.SenderAccount).HasForeignKey(_ => _.SenderAccountId);
+            table.HasMany(_ => _.IncomingTransactions).WithOne(_ => _.RecipientAccount).HasForeignKey(_ => _.RecipientAccountId);
+            table.HasMany(_ => _.OutgoingTransactions).WithOne(_ => _.SenderAccount).HasForeignKey(_ => _.SenderAccountId);
         }
 
     }
