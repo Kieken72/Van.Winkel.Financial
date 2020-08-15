@@ -11,6 +11,7 @@ namespace Van.Winkel.Financial.Domain
         public virtual Account SenderAccount { get; private set; }
         public string Note { get; private set; }
         public decimal Amount { get; private set; }
+        public DateTime Date { get; private set; }
 
         public Transaction(Guid recipientAccountId, Guid senderAccountId, decimal amount, string note = null)
         {
@@ -18,6 +19,7 @@ namespace Van.Winkel.Financial.Domain
             SenderAccountId = senderAccountId;
             Note = note;
             Amount = amount;
+            Date = DateTime.UtcNow;
         }
 
         //Empty ctor for EF
