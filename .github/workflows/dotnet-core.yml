@@ -2,7 +2,7 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master, features/**, bugs/** ]
+    branches: [ master ]
   pull_request:
     branches: [ master, features/**, bugs/** ]
 
@@ -10,8 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env: 
-      working-directory: ./src
 
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +19,8 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
+      working-directory: ./src
     - name: Build
-      run: dotnet build Van.Winkel.Financial.sln --configuration Release --no-restore
+      run: dotnet build ./src/Van.Winkel.Financial.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test Van.Winkel.Financial.sln --no-restore --verbosity normal
+      run: dotnet test ./src/Van.Winkel.Financial.sln --no-restore --verbosity normal
