@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Contracts", "Van.Winkel.Financial.Contracts\Van.Winkel.Financial.Contracts.csproj", "{693C4765-A39A-41A1-A664-EB73AA59AA86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Van.Winkel.Financial.Contracts", "Van.Winkel.Financial.Contracts\Van.Winkel.Financial.Contracts.csproj", "{693C4765-A39A-41A1-A664-EB73AA59AA86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Database", "Van.Winkel.Financial.Database\Van.Winkel.Financial.Database.csproj", "{2353042B-DB9D-47E9-BB2B-A426EB150AAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Van.Winkel.Financial.Database", "Van.Winkel.Financial.Database\Van.Winkel.Financial.Database.csproj", "{2353042B-DB9D-47E9-BB2B-A426EB150AAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Domain", "Van.Winkel.Financial.Domain\Van.Winkel.Financial.Domain.csproj", "{7B096231-A8FF-4E25-87EC-A99491EB4C45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Van.Winkel.Financial.Domain", "Van.Winkel.Financial.Domain\Van.Winkel.Financial.Domain.csproj", "{7B096231-A8FF-4E25-87EC-A99491EB4C45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Enums", "Van.Winkel.Financial.Enums\Van.Winkel.Financial.Enums.csproj", "{A74F4AA7-C5C8-4418-ABB8-82FC6BC8AA0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Van.Winkel.Financial.Enums", "Van.Winkel.Financial.Enums\Van.Winkel.Financial.Enums.csproj", "{A74F4AA7-C5C8-4418-ABB8-82FC6BC8AA0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Service", "Van.Winkel.Financial.Service\Van.Winkel.Financial.Service.csproj", "{0FD6BAD5-25DC-42AE-BD38-E93DEEFF428C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Van.Winkel.Financial.Service", "Van.Winkel.Financial.Service\Van.Winkel.Financial.Service.csproj", "{0FD6BAD5-25DC-42AE-BD38-E93DEEFF428C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Infrastructure", "Van.Winkel.Financial.Infrastructure\Van.Winkel.Financial.Infrastructure.csproj", "{55817963-2DD7-4606-880D-CF83AD21437E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Van.Winkel.Financial.Infrastructure", "Van.Winkel.Financial.Infrastructure\Van.Winkel.Financial.Infrastructure.csproj", "{55817963-2DD7-4606-880D-CF83AD21437E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Host", "Van.Winkel.Financial.Host\Van.Winkel.Financial.Host.csproj", "{F45397BE-79F0-43E9-A38B-00E3422457D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Van.Winkel.Financial.Host", "Van.Winkel.Financial.Host\Van.Winkel.Financial.Host.csproj", "{F45397BE-79F0-43E9-A38B-00E3422457D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Van.Winkel.Financial.Domain.Tests", "Van.Winkel.Financial.Domain.Tests\Van.Winkel.Financial.Domain.Tests.csproj", "{A449D161-A928-473C-B6CE-F71440D0275F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F45397BE-79F0-43E9-A38B-00E3422457D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F45397BE-79F0-43E9-A38B-00E3422457D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F45397BE-79F0-43E9-A38B-00E3422457D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A449D161-A928-473C-B6CE-F71440D0275F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A449D161-A928-473C-B6CE-F71440D0275F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A449D161-A928-473C-B6CE-F71440D0275F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A449D161-A928-473C-B6CE-F71440D0275F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
