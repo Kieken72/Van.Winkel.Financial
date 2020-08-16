@@ -9,5 +9,6 @@ namespace Van.Winkel.Financial.Enums
         InvalidMinNameLength = 3,
         InvalidMinSurnameLength = 4,
         CustomerNotFound = 5,
+        InvalidUnderZeroInitialCredit = 6,
     }
 }
