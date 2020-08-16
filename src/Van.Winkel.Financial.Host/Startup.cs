@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Van.Winkel.Financial.Infrastructure.Configuration;
 using Van.Winkel.Financial.Infrastructure.EntityFramework;
 using Van.Winkel.Financial.Infrastructure.Mediatr;
 using Van.Winkel.Financial.Service.Customer;
+using static System.Environment;
 
 namespace Van.Winkel.Financial.Host
 {
@@ -30,12 +25,15 @@ namespace Van.Winkel.Financial.Host
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigurationHelper(c => {
+                c.ConnectionString = GetEnvironmentVariable("CONNECTIONSTRING");
+            });
+
 
             services.AddMediatR(typeof(GetCustomerRequest).Assembly);
             services.AddMediatRRequestValidators(typeof(GetCustomerRequest).Assembly);
 
-            services.AddDbContext<IFinancialContext, FinancialContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("financial")));
+            services.AddDbContext<IFinancialContext, FinancialContext>();
 
             services.AddControllers();
         }

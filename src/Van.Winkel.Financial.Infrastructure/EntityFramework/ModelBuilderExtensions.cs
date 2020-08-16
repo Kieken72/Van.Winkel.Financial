@@ -5,16 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Van.Winkel.Financial.Infrastructure.EntityFramework
 {
-    public class EntityTypeConfigurationRegistration
+    public static class ModelBuilderExtensions
     {
-        private readonly ModelBuilder _modelBuilder;
-
-        public EntityTypeConfigurationRegistration(ModelBuilder modelBuilder)
-        {
-            _modelBuilder = modelBuilder;
-        }
-
-        public void Register(params Assembly[] assemblies)
+        public static void RegisteTypeConfigurations(this ModelBuilder modelBuilder, params Assembly[] assemblies)
         {
             var types = assemblies.SelectMany(a =>
                 a.GetTypes().Where(t =>
@@ -30,14 +23,14 @@ namespace Van.Winkel.Financial.Infrastructure.EntityFramework
 
                 var tIEntityTypeConfigurationGeneric = tIEntityTypeConfiguration.GetGenericArguments().First();
 
-                var mApplyConfiguration = _modelBuilder.GetType()
+                var mApplyConfiguration = modelBuilder.GetType()
                     .GetMethods().First(m =>
-                        m.Name == nameof(_modelBuilder.ApplyConfiguration));
+                        m.Name == nameof(modelBuilder.ApplyConfiguration));
 
                 var mApplyConfigurationGeneric =
                     mApplyConfiguration.MakeGenericMethod(tIEntityTypeConfigurationGeneric);
                 var entityTypeConfiguration = Activator.CreateInstance(type);
-                mApplyConfigurationGeneric.Invoke(_modelBuilder, new[] { entityTypeConfiguration });
+                mApplyConfigurationGeneric.Invoke(modelBuilder, new[] { entityTypeConfiguration });
             }
         }
     }

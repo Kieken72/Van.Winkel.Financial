@@ -14,8 +14,7 @@ namespace Van.Winkel.Financial.Infrastructure.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            var entityTypeConfigurationRegistration = new EntityTypeConfigurationRegistration(modelBuilder);
-            entityTypeConfigurationRegistration.Register(GetType().Assembly);
+            modelBuilder.RegisteTypeConfigurations(GetType().Assembly);
         }
 
         public DbSet<Customer> Customers { get; set; }
