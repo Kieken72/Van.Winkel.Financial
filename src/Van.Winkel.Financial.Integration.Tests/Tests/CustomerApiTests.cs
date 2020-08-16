@@ -157,7 +157,7 @@ namespace Van.Winkel.Financial.Integration.Tests.Tests
         }
 
         [Fact]
-        public async Task Post_CustomerWithIncorrect_ReturnsError()
+        public async Task Post_CustomerWithIncorrectFields_ReturnsError()
         {
             //Arrange
             var newCustomer = new Customer { Name = "", Surname = new string('*', 251) };
@@ -175,6 +175,80 @@ namespace Van.Winkel.Financial.Integration.Tests.Tests
             Assert.Equal(2, bag.Errors.Count());
         }
 
+        [Fact]
+        public async Task Put_CustomerWithCorrectData_ReturnsCustomer()
+        {
+            //Arrange
+            var existingCustomer = new Customer { Name = "Jef", Surname = "Langleven" };
 
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                Content = RequestHelper.CreateJson(existingCustomer),
+                RequestUri = new Uri($"https://localhost/api/customer/{Utilities.CustomerId}")
+            };
+
+            // Act
+            var response = await _client.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+
+            var customer = JsonSerializer.Deserialize<Customer>(content, _options);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(existingCustomer.Surname, customer.Surname);
+        }
+
+        [Fact]
+        public async Task Put_CustomerWithIncorrectFields_ReturnsError()
+        {
+            //Arrange
+            var existingCustomer = new Customer { Name = "", Surname = "Langleven" };
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                Content = RequestHelper.CreateJson(existingCustomer),
+                RequestUri = new Uri($"https://localhost/api/customer/{Utilities.CustomerId}")
+            };
+
+            // Act
+            var response = await _client.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+
+            var bag = JsonSerializer.Deserialize<ValidatioBagResult>(content, _options);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.True(bag.Errors.Any(_ => _.ValidationErrorCode == ValidationErrorCode.InvalidMinNameLength));
+            Assert.Equal(1, bag.Errors.Count());
+        }
+
+        [Fact]
+        public async Task Put_CustomerWithIncorrectId_ReturnsNotFound()
+        {
+            //Arrange
+            var existingCustomer = new Customer { Name = "Jef", Surname = "Langleven" };
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                Content = RequestHelper.CreateJson(existingCustomer),
+                RequestUri = new Uri($"https://localhost/api/customer/{Guid.Empty}")
+            };
+
+            // Act
+            var response = await _client.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+
+            var bag = JsonSerializer.Deserialize<ValidatioBagResult>(content, _options);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            Assert.True(bag.Errors.Any(_ => _.ValidationErrorCode == ValidationErrorCode.CustomerNotFound));
+            Assert.Equal(1, bag.Errors.Count());
+        }
     }
+
+
 }

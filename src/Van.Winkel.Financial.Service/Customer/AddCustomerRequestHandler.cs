@@ -19,14 +19,6 @@ namespace Van.Winkel.Financial.Service.Customer
 
     public class AddCustomerRequestValidator : RequestValidator<AddCustomerRequest, AddCustomerResponse>
     {
-        private readonly IFinancialContext _financialContext;
-
-        public AddCustomerRequestValidator(IFinancialContext financialContext)
-        {
-            _financialContext = financialContext;
-        }
-
-
         protected override async Task<ValidationBag> Validate(AddCustomerRequest request, CancellationToken cancellationToken)
         {
             var bag = new ValidationBag();

@@ -32,9 +32,18 @@ namespace Van.Winkel.Financial.Host.Controllers
         }
 
         [HttpPost, Route("")]
-        public async Task<IActionResult> Get(Customer customer)
+        public async Task<IActionResult> Post(Customer customer)
         {
             var request = new AddCustomerRequest() { Customer = customer };
+            var response = await _mediator.Send(request);
+            return response.ToActionResult(_ => _.Customer);
+        }
+
+        [HttpPut, Route("{id}")]
+        public async Task<IActionResult> Put(Guid id, Customer customer)
+        {
+            customer.Id = id;
+            var request = new UpdateCustomerRequest { Customer = customer };
             var response = await _mediator.Send(request);
             return response.ToActionResult(_ => _.Customer);
         }
