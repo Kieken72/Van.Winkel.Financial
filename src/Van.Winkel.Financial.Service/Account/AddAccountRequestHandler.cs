@@ -40,7 +40,7 @@ namespace Van.Winkel.Financial.Service.Account
                 bag.AddError(ValidationErrorCode.CustomerNotFound);
             }
 
-            if (request.InitialCredit <0)
+            if (decimal.Compare(request.InitialCredit,0)<0)
                 bag.AddError(ValidationErrorCode.InvalidUnderZeroInitialCredit, new { request.InitialCredit });
 
             return bag;
@@ -61,12 +61,12 @@ namespace Van.Winkel.Financial.Service.Account
         {
             var accountToAdd = new Domain.Account(request.CustomerId);
 
-            accountToAdd.UpdateBalance(request.InitialCredit);
 
             var result = await _financialContext.Accounts.AddAsync(accountToAdd, cancellationToken);
 
             if (request.InitialCredit != 0)
             {
+                accountToAdd.UpdateBalance(request.InitialCredit);
                 var transactionToAdd = new Transaction(result.Entity.Id, null, request.InitialCredit, "Initial transaction");
                 await _financialContext.Transactions.AddAsync(transactionToAdd, cancellationToken);
             }
@@ -76,7 +76,7 @@ namespace Van.Winkel.Financial.Service.Account
             {
                 Account = new Contracts.Account
                 {
-                    CustomerId = result.Entity.Id,
+                    CustomerId = result.Entity.CustomerId,
                     Balance = result.Entity.Balance
                 }
             };

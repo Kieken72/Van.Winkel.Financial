@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Text;
+using System.Collections.Generic;
 
 namespace Van.Winkel.Financial.Contracts
 {
-    public class Customer
+    public class CustomerWithAccount
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public IEnumerable<AccountWithTransactions> Accounts { get; set; }
     }
 }
