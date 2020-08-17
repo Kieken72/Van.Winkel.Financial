@@ -19,7 +19,7 @@ jobs:
         node-version: '12.x'
     - name: Install dependencies
       run: npm ci
-      working-directory: ./src/Van.Winkel.Frontend
+      working-directory: ./src/Van.Winkel.Financial.Frontend
     - name: Build
       run: npm run build:ci
-      working-directory: ./src/Van.Winkel.Frontend
+      working-directory: ./src/Van.Winkel.Financial.Frontend
