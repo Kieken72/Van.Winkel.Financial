@@ -14,15 +14,7 @@ jobs:
     inputs:
       workingDir: $(Build.SourcesDirectory)/src/Van.Winkel.Financial.Frontend
       verbose: false
-
-  - task: Npm@1
-    displayName: npm run
-    inputs:
-      command: custom
-      workingDir: $(Build.SourcesDirectory)/src/Van.Winkel.Financial.Frontend
-      verbose: false
-      customCommand: 'run test -- --watch=false'
-
+      
   - task: Npm@1
     displayName: npm run
     inputs:
