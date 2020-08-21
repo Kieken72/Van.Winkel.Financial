@@ -1,6 +1,7 @@
 jobs:
 - job: van_winkel_financial_host
-  pool: 'Azure Pipelines'
+  pool:
+    name: 'Hosted Ubuntu 1604'
   variables:
     buildConfiguration: 'Release'
   steps:
