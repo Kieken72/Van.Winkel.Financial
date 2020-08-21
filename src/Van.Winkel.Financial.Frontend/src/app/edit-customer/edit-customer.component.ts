@@ -24,7 +24,7 @@ export class EditCustomerComponent implements OnInit {
   tapSuccess(({ id }) => this.router.navigateByUrl(`/customer/detail/${id}`))
   , mapError());
 
-  tableSaving$ = this.updatingCustomer$.pipe(
+  customerSaving$ = this.updatingCustomer$.pipe(
       liftLoaded(0),
       shareReplay(1),
       map((_) => !_),
