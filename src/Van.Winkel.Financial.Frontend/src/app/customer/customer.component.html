@@ -1,0 +1,32 @@
+<div class="container" *ngIf="customer$ | async as customer">
+
+  <div class="row">
+    <div class="col-md-12 mb-3">
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input type="text" class="form-control" id="inputName" [ngModel]="customer.name" [readonly]="true">
+        </div>
+        <div class="form-group">
+          <label for="inputSurname">Surname</label>
+          <input type="text" class="form-control" id="inputSurname" [ngModel]="customer.surname" [readonly]="true">
+        </div>
+
+        <a [routerLink]="customer.addAccountLink" class="btn btn-primary">Add Account</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let account of customer.accounts">
+      <div class="card mb-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Balance {{account.balance}}</h5>
+          <p>Account Id: {{account.id}}</p>
+          <h6>Transactions:</h6>
+        </div>
+        <ul class="list-group list-group-flush" >
+          <li class="list-group-item" *ngFor="let transaction of account.transactions">{{transaction.amount}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- /container -->

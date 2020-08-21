@@ -1,0 +1,4 @@
+<app-customer-form [customer]="customer"
+                  [error]="error$ | async"
+                  [isNew]="true"
+                  (save)="createCustomer($event)"></app-customer-form>

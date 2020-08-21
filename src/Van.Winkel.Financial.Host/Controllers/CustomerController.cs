@@ -23,6 +23,14 @@ namespace Van.Winkel.Financial.Host.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet, Route("")]
+        public async Task<IActionResult> Get()
+        {
+            var request = new GetCustomersRequest {};
+            var response = await _mediator.Send(request);
+            return response.ToActionResult(_ => _.Customers);
+        }
+
         [HttpGet, Route("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

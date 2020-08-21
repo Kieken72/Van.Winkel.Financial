@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="inputName">Customer Id</label>
+        <app-field-form-error [error]="error" [possibleErrors]="['CustomerNotFound']">
+          <input type="text" class="form-control" id="inputName" [(ngModel)]="formAccount.customerId">
+        </app-field-form-error>
+      </div>
+      <div class="form-group">
+        <label for="inputSurname">Initial Credit</label>
+
+        <app-field-form-error [error]="error" [possibleErrors]="['InvalidUnderZeroInitialCredit']">
+          <input type="number" class="form-control" id="inputSurname" [(ngModel)]="formAccount.balance">
+        </app-field-form-error>
+      </div>
+      <button type="button" class="btn btn-success" (click)="save.emit(formAccount)"
+        [disabled]="saveDisabled">Save</button>
+    </div>
+  </div>
+</div>
