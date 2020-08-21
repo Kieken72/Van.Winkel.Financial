@@ -1,8 +1,10 @@
-import { ValidationBag } from './validation-bag';
 
+import {Error } from './error';
 export class ApiError {
-    validationBag: ValidationBag;
+    errors: Error[];
+    isValid: boolean;
     constructor(other: Partial<ApiError>) {
-        this.validationBag = other.validationBag;
+        this.errors = other.errors;
+        this.isValid = other.isValid;
     }
 }

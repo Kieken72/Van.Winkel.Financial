@@ -1,0 +1,4 @@
+<app-account-form [account]="account"
+                  [error]="error$ | async"
+                  [isNew]="true"
+                  (save)="createAccount($event)"></app-account-form>

@@ -1,0 +1,6 @@
+<app-customer-form [customer]="customer$ | async"
+                                  [loaded]="loaded$ | async"
+                                  [error]="error$|async"
+                                  [saveDisabled]="customerSaving$ | async"
+                                  [canEditData]="true"
+                                  (save)="updateCustomer($event)"></app-customer-form>

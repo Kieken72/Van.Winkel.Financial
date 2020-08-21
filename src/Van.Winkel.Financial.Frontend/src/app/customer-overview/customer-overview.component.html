@@ -1,0 +1,18 @@
+<div class="container" *ngIf="customers$ | async as customers">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let customer of customers">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Customer</h5>
+        </div>
+        <ul class="list-group list-group-flush" >
+          <li class="list-group-item"> Name: {{customer.name}}</li>
+          <li class="list-group-item"> Surname: {{customer.surname}}</li>
+        </ul>
+
+        <a [routerLink]="customer.detailLink" class="btn btn-primary">Detail</a>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- /container -->
