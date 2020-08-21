@@ -30,7 +30,9 @@ namespace Van.Winkel.Financial.Host
             services.AddMediatRRequestValidators(typeof(GetCustomerRequest).Assembly);
 
             services.AddDbContext<IFinancialContext, FinancialContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("financial")));
+                options.UseSqlServer(Configuration.GetConnectionString("financial"))
+                //options.UseInMemoryDatabase("InMemoryDbForTesting")
+                );
 
             services.AddSpaStaticFiles(cfg =>
             {
