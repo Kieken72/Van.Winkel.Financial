@@ -1,12 +1,45 @@
 jobs:
 - job: van_winkel_financial_host
-  pool: 'default'
+  pool: 'Azure Pipelines'
   variables:
     buildConfiguration: 'Release'
   steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.x'
+
+  - task: Npm@1
+    displayName: npm install
+    inputs:
+      workingDir: $(Build.SourcesDirectory)/src/Van.Winkel.Financial.Frontend
+      verbose: false
+
+  - task: Npm@1
+    displayName: npm run
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)/src/Van.Winkel.Financial.Frontend
+      verbose: false
+      customCommand: 'run test -- --watch=false'
+
+  - task: Npm@1
+    displayName: npm run
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)/src/Van.Winkel.Financial.Frontend
+      verbose: false
+      customCommand: 'run build'
+
+  - task: UseDotNet@2
+    displayName: 'Use dotnet sdk 3.x'
+    inputs:
+      version: 3.x
+      includePreviewVersions: true
   - script: |
       cd $(Build.SourcesDirectory)/src/Van.Winkel.Financial.Host
       dotnet build --configuration $(buildConfiguration)
+      dotnet test ../Van.Winkel.Financial.Domain.Tests --configuration $(buildConfiguration) --logger trx
+      dotnet test ../Van.Winkel.Financial.Integration.Tests --configuration $(buildConfiguration) --logger trx
       dotnet publish --configuration $(buildConfiguration) --output $(build.artifactstagingdirectory)/van-winkel-financial-host
 
   - task: PublishTestResults@2
