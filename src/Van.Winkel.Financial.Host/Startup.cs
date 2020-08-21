@@ -1,6 +1,8 @@
+using System.IO;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,10 @@ namespace Van.Winkel.Financial.Host
             services.AddDbContext<IFinancialContext, FinancialContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("financial")));
 
+            services.AddSpaStaticFiles(cfg =>
+            {
+                cfg.RootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            });
             services.AddControllers();
         }
 
@@ -41,6 +47,10 @@ namespace Van.Winkel.Financial.Host
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
+            app.UseSpaStaticFiles(new StaticFileOptions { });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -50,6 +60,12 @@ namespace Van.Winkel.Financial.Host
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.Run(async (context) =>
+            {
+                context.Response.ContentType = "text/html";
+                await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
             });
         }
     }
